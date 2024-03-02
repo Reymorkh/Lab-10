@@ -2,7 +2,7 @@
 
 namespace Lab_10
 {
-  public class DigitalWatch : Watch
+  public class DigitalWatch : Watch, IInit, IComparable, ICloneable
   {
     private string displayType = "No display";
 
@@ -15,7 +15,7 @@ namespace Lab_10
     public DigitalWatch() { }
     public DigitalWatch(string name, short year, string display) : base(name, year) => DisplayType = display;
 
-    public override string Show() => ("Электронные часы " + BrandName + " " + YearOfIssue + " года выпуска с типом дисплея: " + DisplayType + ".");
+    public override string ToString() => ("Электронные часы " + BrandName + " " + YearOfIssue + " года выпуска с типом дисплея: " + DisplayType + ".");
     public override void Init() => (this.BrandName, this.YearOfIssue, this.DisplayType) = (GetString("имя бренда"), GetShort("год выпуска"), GetString("стиль"));
     public override void RandomInit()
     {
@@ -31,6 +31,16 @@ namespace Lab_10
       if (obj != null || obj is not DigitalWatch)
         return false;
       return ((DigitalWatch)obj).BrandName == this.BrandName && ((DigitalWatch)obj).YearOfIssue == this.YearOfIssue && ((DigitalWatch)obj).DisplayType == this.DisplayType;
+    }
+
+    public override int CompareTo(object? obj)
+    {
+      throw new NotImplementedException();
+    }
+
+    public override object Clone()
+    {
+      throw new NotImplementedException();
     }
   }
 }

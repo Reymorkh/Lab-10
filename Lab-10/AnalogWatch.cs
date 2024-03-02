@@ -1,7 +1,7 @@
 ﻿using static Lab_10.Logic;
 namespace Lab_10
 {
-  public class AnalogWatch : Watch
+  public class AnalogWatch : Watch, IInit, IComparable, ICloneable
   {
     private string style = "No style";
 
@@ -14,7 +14,7 @@ namespace Lab_10
     public AnalogWatch() { }
     public AnalogWatch(string name, short year, string sty) : base(name, year) => Style = sty; 
 
-    public override string Show() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
+    public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
     public override void Init() => (this.BrandName, this.YearOfIssue, this.Style) = (GetString("имя бренда"), GetShort("год выпуска"), GetString("стиль"));
     public override void RandomInit()
     {
@@ -29,6 +29,16 @@ namespace Lab_10
       if (obj != null || obj is not AnalogWatch)
         return false;
       return ((AnalogWatch)obj).BrandName == this.BrandName && ((AnalogWatch)obj).YearOfIssue == this.YearOfIssue && ((AnalogWatch)obj).Style == this.Style;
+    }
+
+    public override int CompareTo(object? obj)
+    {
+      throw new NotImplementedException();
+    }
+
+    public override object Clone()
+    {
+      throw new NotImplementedException();
     }
   }
 }

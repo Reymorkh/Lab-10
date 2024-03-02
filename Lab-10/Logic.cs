@@ -1,6 +1,6 @@
 ﻿namespace Lab_10
 {
-  public static class Logic
+  internal static class Logic
   {
     public static readonly string[] Brands = new string[] { "Cartier", "Ulysse Nardin", "Zenith", "Jaeger-LeCoultre", "IWC", "Breitling", "Longines", "Oris", "Bomberg", "Edox", "Rado", "Tissot", "Roamer", "Certina", "Jacques du Manoir" };
     public static readonly string[] DisplayTypes = new string[] { "Liquid-crysta", "Light-emitting diode", "backlit LCD", "OLED", "AMOLED" };
@@ -17,6 +17,12 @@
     {
       Console.Write("Введите " + obj + ": ");
       return Convert.ToInt16(Console.ReadLine());
+    }
+
+    public static double GetDouble(string obj)
+    {
+      Console.Write("Введите " + obj + ": ");
+      return Convert.ToDouble(Console.ReadLine());
     }
   }
 }

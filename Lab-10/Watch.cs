@@ -3,7 +3,7 @@ using static Lab_10.Logic;
 
 namespace Lab_10
 {
-  public abstract class Watch : IInit
+  public abstract class Watch : IInit, IComparable, ICloneable
   {
     private string brandName = "No brand";
     private short yearOfIssue = 1;
@@ -36,7 +36,7 @@ namespace Lab_10
       }
     }
 
-    public abstract string Show();
+    public abstract string ToString();
     public abstract void Init();
     public abstract void RandomInit();
 
@@ -46,5 +46,8 @@ namespace Lab_10
         return false;
       return ((Watch)obj).BrandName == this.BrandName && ((Watch)obj).YearOfIssue == this.YearOfIssue;
     }
+
+    public abstract int CompareTo(object? obj);
+    public abstract object Clone();
   }
 }

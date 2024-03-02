@@ -2,7 +2,7 @@
 
 namespace Lab_10
 {
-  public class SmartWatch : DigitalWatch, IInit
+  public class SmartWatch : DigitalWatch, IInit, IComparable, ICloneable
   {
     private string operatiningSystem = "No System";
     private bool heartRateSensor = false;
@@ -26,8 +26,8 @@ namespace Lab_10
       private set => operatiningSystem = value;
     }
 
-    public override string Show() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует." : "отсутствует.");
-    public void Init() => (this.BrandName, this.YearOfIssue, this.DisplayType, this.OperatingSystem, this.HeartRateSensor) = (GetString("имя бренда"), GetShort("год выпуска"), GetString("тип дисплея"), GetString("название ОС"), true);
+    public override string ToString() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует." : "отсутствует.");
+    public override void Init() => (this.BrandName, this.YearOfIssue, this.DisplayType, this.OperatingSystem, this.HeartRateSensor) = (GetString("имя бренда"), GetShort("год выпуска"), GetString("тип дисплея"), GetString("название ОС"), true);
     public override void RandomInit()
     {
       Random rng = new();
