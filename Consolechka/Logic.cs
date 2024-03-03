@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,28 @@ namespace Consolechka
         if (styleCounter[i] == 0)
           output += styles[i];
       return output;
+    }
+
+    public static int BinarySearch(Watch[] arr, int searchedNumber)
+    {
+      int indexLeft = 0, indexRight = arr.Length - 1;
+      while (indexLeft <= indexRight)
+      {
+        int index = (indexLeft + indexRight) / 2;
+        if (searchedNumber == arr[index].YearOfIssue)
+        {
+          return index;
+        }
+        else if (searchedNumber < arr[index].YearOfIssue)
+        {
+          indexRight = index - 1;
+        }
+        else
+        {
+          indexLeft = index + 1;
+        }
+      }
+      return -1;
     }
   }
 }

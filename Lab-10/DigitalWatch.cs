@@ -28,19 +28,38 @@ namespace Lab_10
 
     public override bool Equals(object? obj)
     {
-      if (obj != null || obj is not DigitalWatch)
+      if (obj == null || obj is not DigitalWatch watch)
         return false;
-      return ((DigitalWatch)obj).BrandName == this.BrandName && ((DigitalWatch)obj).YearOfIssue == this.YearOfIssue && ((DigitalWatch)obj).DisplayType == this.DisplayType;
+      return watch.BrandName == this.BrandName && watch.YearOfIssue == this.YearOfIssue && watch.DisplayType == this.DisplayType;
     }
 
     public override int CompareTo(object? obj)
     {
-      throw new NotImplementedException();
+      if (obj != null)
+      {
+        if (obj is Watch watch)
+          return YearOfIssue.CompareTo(watch.YearOfIssue);
+        if (obj is Rectangle)
+          return 1;
+        return -1;
+      }
+      throw new ArgumentNullException();
     }
+
+    public override object ShallowCopy() => MemberwiseClone();
 
     public override object Clone()
     {
-      throw new NotImplementedException();
+      DigitalWatch watch = new DigitalWatch();
+      watch.BrandName = BrandName;
+      watch.YearOfIssue = YearOfIssue;
+      watch.DisplayType = DisplayType;
+      return watch;
+    }
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(BrandName, YearOfIssue, displayType, DisplayType);
     }
   }
 }

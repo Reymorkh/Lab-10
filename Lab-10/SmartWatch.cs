@@ -38,11 +38,42 @@ namespace Lab_10
       this.HeartRateSensor = rng.Next(2) == 1;
     }
 
+    public override int CompareTo(object? obj)
+    {
+      if (obj != null)
+      {
+        if (obj is Watch watch)
+          return YearOfIssue.CompareTo(watch.YearOfIssue);
+        if (obj is Rectangle)
+          return 1;
+        return -1;
+      }
+      throw new ArgumentNullException();
+    }
+
     public override bool Equals(object? obj)
     {
-      if (obj != null || obj is not SmartWatch)
+      if (obj == null || obj is not SmartWatch watch)
         return false;
-      return ((SmartWatch)obj).BrandName == this.BrandName && ((SmartWatch)obj).YearOfIssue == this.YearOfIssue && ((SmartWatch)obj).DisplayType == this.DisplayType && ((SmartWatch)obj).OperatingSystem == this.OperatingSystem && ((SmartWatch)obj).HeartRateSensor == this.HeartRateSensor;
+      return watch.BrandName == this.BrandName && watch.YearOfIssue == this.YearOfIssue && watch.DisplayType == this.DisplayType && watch.OperatingSystem == this.OperatingSystem && watch.HeartRateSensor == this.HeartRateSensor;
+    }
+
+    public override object ShallowCopy() => MemberwiseClone();
+
+    public override object Clone()
+    {
+      SmartWatch watch = new SmartWatch();
+      watch.BrandName = BrandName;
+      watch.YearOfIssue = YearOfIssue;
+      watch.DisplayType = DisplayType;
+      watch.OperatingSystem = OperatingSystem;
+      watch.HeartRateSensor = HeartRateSensor;
+      return watch;
+    }
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(BrandName, YearOfIssue, DisplayType, operatiningSystem, heartRateSensor, HeartRateSensor, OperatingSystem);
     }
   }
 }

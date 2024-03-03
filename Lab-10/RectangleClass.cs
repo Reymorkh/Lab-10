@@ -1,8 +1,6 @@
-﻿using Lab_10;
-using static Lab_10.Logic;
-using System;
+﻿using static Lab_10.Logic;
 
-namespace Лабораторная_работа__9_формы
+namespace Lab_10
 {
   public class Rectangle : IInit, IComparable, ICloneable
   {
@@ -57,6 +55,8 @@ namespace Лабораторная_работа__9_формы
       }
     }
 
+    public double Area { get => Width * Length; }
+
     public static int Count { get { return count; } }
     #endregion
 
@@ -101,9 +101,9 @@ namespace Лабораторная_работа__9_формы
       this.Width = rng.NextDouble();
     }
 
-    public string Show() => $"Прямоугольник с величнами сторон: {this.Length:F4} и {this.Width:f4}";
+    public override string ToString() => $"Прямоугольник с величнами сторон: {this.Length:F4} и {this.Width:f4}";
 
-    public override bool Equals(object obj) 
+    public override bool Equals(object?  obj) 
     {
       if (obj == null || !(obj is Rectangle))
         return false;
@@ -113,17 +113,14 @@ namespace Лабораторная_работа__9_формы
 
     public override int GetHashCode()
     {
-      int hashCode = 787142776;
-      hashCode = hashCode * -1521134295 + length.GetHashCode();
-      hashCode = hashCode * -1521134295 + width.GetHashCode();
-      hashCode = hashCode * -1521134295 + Length.GetHashCode();
-      hashCode = hashCode * -1521134295 + Width.GetHashCode();
-      return hashCode;
+      return HashCode.Combine(length, width, Length, Width);
     }
 
     public int CompareTo(object? obj)
     {
-      throw new NotImplementedException();
+      if (obj != null && obj is Rectangle rect)
+        return Area.CompareTo(rect.Area);
+      return -1;
     }
 
     public object Clone()
