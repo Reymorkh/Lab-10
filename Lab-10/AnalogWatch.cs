@@ -8,41 +8,51 @@ namespace Lab_10
     public string Style
     {
       get => style;
-      private set => style = value;
+      private set
+      {
+        if (value != null)
+          style = value;
+        else
+          throw new NullReferenceException();
+      }
     }
 
     public AnalogWatch() { }
-    public AnalogWatch(string name, short year, string sty) : base(name, year) => Style = sty; 
+    public AnalogWatch(string name, short year, string sty) : base(name, year) => Style = sty;
 
+    public override string Show() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
     public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
-    public override void Init() => (this.BrandName, this.YearOfIssue, this.Style) = (GetString("имя бренда"), GetShort("год выпуска"), GetString("стиль"));
+    public override void Init() 
+    {
+      base.Init();
+      this.Style = GetString("стиль"); 
+    }
+
     public override void RandomInit()
     {
-      Random rng = new();
-      this.BrandName = Brands[rng.Next(Brands.Length)];
-      this.YearOfIssue = (short)rng.Next(1368, 2024);
-      this.Style = Styles[rng.Next(Styles.Length)];
+      base.RandomInit();
+      this.Style = Styles[new Random().Next(Styles.Length)];
     }
 
     public override bool Equals(object? obj)
     {
-      if (obj == null || obj is not AnalogWatch watch)
-        return false;
-      return watch.BrandName == this.BrandName && watch.YearOfIssue == this.YearOfIssue && watch.Style == this.Style;
+      //if (obj == null || obj is not AnalogWatch watch)
+      //  return false;
+      return base.Equals(obj) && ((AnalogWatch)obj).Style == this.Style;
     }
 
-    public override int CompareTo(object? obj)
-    {
-      if (obj != null)
-      {
-        if (obj is Watch watch)
-          return YearOfIssue.CompareTo(watch.YearOfIssue);
-        if (obj is Rectangle)
-          return 1;
-        return -1;
-      }
-      throw new ArgumentNullException();
-    }
+    //public override int CompareTo(object? obj)
+    //{
+    //  if (obj != null)
+    //  {
+    //    if (obj is Watch watch)
+    //      return YearOfIssue.CompareTo(watch.YearOfIssue);
+    //    if (obj is Rectangle)
+    //      return 1;
+    //    return -1;
+    //  }
+    //  throw new ArgumentNullException();
+    //}
 
     public override object Clone()
     {
@@ -53,10 +63,11 @@ namespace Lab_10
       return watch;
     }
 
-    public override object ShallowCopy() => MemberwiseClone();
     public override int GetHashCode()
     {
-      return HashCode.Combine(BrandName, YearOfIssue, style, Style);
+      return HashCode.Combine(base.GetHashCode(), BrandName, YearOfIssue, Style);
     }
+
+    //public override object ShallowCopy() => MemberwiseClone();
   }
 }

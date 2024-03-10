@@ -12,12 +12,12 @@ namespace Consolechka
       Console.BackgroundColor = ConsoleColor.White;
       Console.Clear();
 
-
+      #region массив типа Watch и его показ
       Watch[] watches = new Watch[20];                                 //массив типа Watch и его показ
       Random rnd = new Random();
       for (int i = 0; i < watches.Length; i++)
       {
-        int menu = rnd.Next(3);
+        int menu = rnd.Next(4);
         switch (menu)
         {
           case 0:
@@ -26,8 +26,11 @@ namespace Consolechka
           case 1:
             watches[i] = new AnalogWatch();
             break;
-            case 2:
+          case 2:
             watches[i] = new DigitalWatch();
+            break;
+          case 3:
+            watches[i] = new Watch();
             break;
         }
         watches[i].RandomInit();
@@ -38,15 +41,16 @@ namespace Consolechka
       Console.WriteLine("Самые новые часы из выборки: " + TheNewestWatch(watches));
       Console.WriteLine("Количество \"смарт\" часов с измерителем пульса: " + SmartWatchHRCounter(watches));
       Console.WriteLine("Уникальные стили аналоговых часов: " + UniqueWatchStyles(watches) + " ");
-
       Console.WriteLine("\n\n");
+      #endregion
 
 
+      #region массив типа IInit и счётчик объектов разных типов в нём
       int smartCount = 0, analogCount = 0, digitalCount = 0, rectangleCount = 0;
       IInit[] Iinits = new IInit[20];                                   //массив типа IInit и счётчик объектов разных типов в нём
       for (int i = 0; i < Iinits.Length; i++)
       {
-        int menu = rnd.Next(4);
+        int menu = rnd.Next(5);
         switch (menu)
         {
           case 0:
@@ -65,27 +69,35 @@ namespace Consolechka
             Iinits[i] = new Rectangle();
             rectangleCount++;
             break;
+          case 4:
+            Iinits[i] = new Watch();
+            break;
         }
         Iinits[i].RandomInit();
         Console.WriteLine(Iinits[i].ToString());
       }
       Console.WriteLine("\nУмных: " + smartCount + " Аналоговых: " + analogCount + " Электронных: " + digitalCount + " Прямоугольников: " + rectangleCount);
-
-
       Console.WriteLine("\n\n");
+      #endregion
+
+
+      #region Сортировка массива типа Watch с последующим бинарным поиском в нём
       Array.Sort(watches);                                              //Сортировка массива типа Watch с последующим бинарным поиском в нём
       foreach(var item in watches)
         Console.WriteLine(item.ToString());
-      Console.WriteLine("Результат бинарного поиска по числу 2002: " + BinarySearch(watches, 2002));
+      Console.WriteLine("Результат бинарного поиска по числу 2002: " + Array.BinarySearch(watches, 2002));
+      #endregion
 
 
-      SmartWatch watch = new SmartWatch(); //попытка продемонстрировать копирование
+
+      #region попытка продемонстрировать копирование
+      SmartWatch watch = new SmartWatch();                              //попытка продемонстрировать копирование
       watch.RandomInit();
       SmartWatch watchCopy1 = (SmartWatch)watch.ShallowCopy();
       watchCopy1.RandomInit();
       SmartWatch watchCopy2 = (SmartWatch)watch.Clone();
       Console.WriteLine($"\n\nОригинал: {watch}\nКопия один: {watchCopy1}\nКопия два: {watchCopy2}");
-
+      #endregion
 
     }
   }
