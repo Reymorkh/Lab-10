@@ -10,12 +10,14 @@ namespace Lab_10
 
     public Watch() { }
 
-    public Watch(string name, short year)
+    public Watch(string name, short year, int id)
     {
       BrandName = name;
       YearOfIssue = year;
+      IdNumb = new IdNumber(id);
     }
 
+    public IdNumber IdNumb {  get; set; }
     public string BrandName
     {
       get => brandName;
@@ -48,6 +50,7 @@ namespace Lab_10
     {
       BrandName = GetString("имя бренда");
       YearOfIssue = GetShort("дата выпуска");
+      IdNumb = new IdNumber(GetInt("айди"));
     }
 
     public virtual void RandomInit()
@@ -77,20 +80,15 @@ namespace Lab_10
       throw new ArgumentNullException();
     }
 
-    public virtual object Clone() => new Watch(BrandName, yearOfIssue);
+    public virtual object Clone() => new Watch(BrandName, yearOfIssue, IdNumb.Id);
 
     public object ShallowCopy() => MemberwiseClone();
-
-    public override int GetHashCode()
-    {
-      return HashCode.Combine(brandName, yearOfIssue, BrandName, YearOfIssue);
-    }
 
     public class IdNumber
     {
       public int number;
 
-      public int Number
+      public int Id
       {
         get => number;
         set
@@ -102,17 +100,16 @@ namespace Lab_10
         }
       }
 
-      public IdNumber(int numb) => Number = numb;
+      public IdNumber(int numb) => Id = numb;
+
+      public override string ToString() => number.ToString();
 
       public override bool Equals(object? obj)
       {
-        if (obj == null || obj is not IdNumber id)
+        if (obj == null || obj is not IdNumber number)
           return false;
-        return id.Number == this.Number;
+        return number.Id == this.Id;
       }
-
-      public override string ToString() => $"{Number}";
-
     }
   }
 }

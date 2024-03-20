@@ -19,7 +19,7 @@ namespace Lab_10
     }
 
     public DigitalWatch() { }
-    public DigitalWatch(string name, short year, string display) : base(name, year) => DisplayType = display;
+    public DigitalWatch(string name, short year, int id, string display) : base(name, year, id) => DisplayType = display;
 
     public override string Show() => ("Электронные часы " + BrandName + " " + YearOfIssue + " года выпуска с типом дисплея: " + DisplayType + ".");
     public override string ToString() => ("Электронные часы " + BrandName + " " + YearOfIssue + " года выпуска с типом дисплея: " + DisplayType + ".");

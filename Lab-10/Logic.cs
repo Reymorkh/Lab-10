@@ -7,29 +7,38 @@
     public static readonly string[] Styles = new string[] { "Luxury", "Sport", "military", "Diver", "Fitness", "Pocket"};
     public static readonly string[] OperatingSystems = new string[] { "Apple WatchOS", "Wear", "Fitbit" , "Garmin" };
 
-    public static string GetString(string obj)
+    public static string GetString(string aim)
     {
-      Console.Write("Введите " + obj + ": ");
+      Console.Write("Введите " + aim + ": ");
       string input ="";
       while (input == "" || input == null)
         input = Console.ReadLine();
       return input;
     }
 
-    public static short GetShort(string obj)
+    public static short GetShort(string aim)
     {
-      Console.Write("Введите " + obj + ": ");
+      Console.Write("Введите " + aim + ": ");
       short input;
       while (short.TryParse(Console.ReadLine(), out input))
         Console.WriteLine("Неправильный ввод");
       return input;
     }
 
-    public static double GetDouble(string obj)
+    public static double GetDouble(string aim)
     {
-      Console.Write("Введите " + obj + ": ");
+      Console.Write("Введите " + aim + ": ");
       double input;
       while (double.TryParse(Console.ReadLine(), out input))
+        Console.WriteLine("Неправильный ввод");
+      return input;
+    }
+
+    public static int GetInt(string aim)
+    {
+      Console.Write("Введите " + aim + ": ");
+      int input;
+      while (int.TryParse(Console.ReadLine(), out input))
         Console.WriteLine("Неправильный ввод");
       return input;
     }

@@ -8,7 +8,7 @@ namespace Lab_10
     private bool heartRateSensor = false;
 
     public SmartWatch() { }
-    public SmartWatch(string name, short year, string display, string os, bool hr) : base(name, year, display)
+    public SmartWatch(string name, short year, int id, string display, string os, bool hr) : base(name, year, id, display)
     {
       OperatingSystem = os;
       HeartRateSensor = hr;

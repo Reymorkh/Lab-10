@@ -1,5 +1,6 @@
 ﻿using static Consolechka.Logic;
 using Lab_10;
+using System.Threading;
 
 namespace Consolechka
 {
@@ -81,13 +82,29 @@ namespace Consolechka
       #endregion
 
 
-      #region Сортировка массива типа Watch с последующим бинарным поиском в нём
-      Array.Sort(watches);                                              //Сортировка массива типа Watch с последующим бинарным поиском в нём
-      foreach(var item in watches)
-        Console.WriteLine(item.ToString());
-      Console.WriteLine("Результат бинарного поиска по числу 2002: " + Array.BinarySearch(watches, 2002));
+      #region Сортировка массива типа Watch с последующим бинарным поиском имени в нём
+      Array.Sort(watches, new SortByName());                                              //Сортировка массива типа Watch по имени с последующим бинарным поиском в нём
+      if (false)
+        foreach (var item in watches)
+          Console.WriteLine(item.ToString());
+      else
+        Console.WriteLine("Массив отсортирован по именам.");
+      int result = Array.BinarySearch(watches, new Watch("Cartier", 1, 1), new SortByName());
+      Console.WriteLine("Результат бинарного поиска Cartier: " + (result < 0 ? " не найден" : result + 1) + "\n\n") ;
       #endregion
 
+
+
+      #region Сортировка массива типа Watch с последующим бинарным поиском числа в нём
+      Array.Sort(watches);                                              //Сортировка массива типа Watch с последующим бинарным поиском в нём
+      if (false)
+        foreach (var item in watches)
+          Console.WriteLine(item.ToString());
+      else
+        Console.WriteLine("Массив отсортирован по годам");
+      result = Array.BinarySearch(watches, new Watch("No name", 2002, 1));
+      Console.WriteLine("Результат бинарного поиска числа 2002: " + (result < 0 ? " не найден" : result + 1));
+      #endregion
 
 
       #region попытка продемонстрировать копирование

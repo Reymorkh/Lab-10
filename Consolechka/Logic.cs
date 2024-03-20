@@ -20,8 +20,12 @@ namespace Consolechka
       int counter = 0;
       foreach (Watch watch in arr)
       {
-        if (watch is SmartWatch smart && smart.HeartRateSensor)
-          counter++;
+        if (watch is SmartWatch)
+        {
+          SmartWatch smart = watch as SmartWatch;
+          if (smart.HeartRateSensor)
+            counter++;
+        }
       }
       return counter;
     }
