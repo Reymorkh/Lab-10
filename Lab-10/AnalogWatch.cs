@@ -20,8 +20,8 @@ namespace Lab_10
     public AnalogWatch() { }
     public AnalogWatch(string name, short year, int id, string sty) : base(name, year, id) => Style = sty;
 
-    public override string Show() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
-    public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ".");
+    public override string Show() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ". " + IdNumb);
+    public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска и типа " + Style + ". " + IdNumb);
     public override void Init() 
     {
       base.Init();

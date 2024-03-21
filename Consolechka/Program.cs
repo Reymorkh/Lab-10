@@ -108,12 +108,12 @@ namespace Consolechka
 
 
       #region попытка продемонстрировать копирование
-      SmartWatch watch = new SmartWatch();                              //попытка продемонстрировать копирование
-      watch.RandomInit();
-      SmartWatch watchCopy1 = (SmartWatch)watch.ShallowCopy();
-      watchCopy1.RandomInit();
-      SmartWatch watchCopy2 = (SmartWatch)watch.Clone();
-      Console.WriteLine($"\n\nОригинал: {watch}\nКопия один: {watchCopy1}\nКопия два: {watchCopy2}");
+      Watch watch = new Watch("No brand", 1, 31);                              //попытка продемонстрировать копирование
+      Watch watchCopy1 = (Watch)watch.ShallowCopy();
+      Watch watchCopy2 = (Watch)watch.Clone();
+      Console.WriteLine($"\n\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия два: {watchCopy2}");
+      watch.IdNumb.Id = 99;
+      Console.WriteLine($"Id в оригинале сменилось на 99.\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия два: {watchCopy2}");
       #endregion
 
     }

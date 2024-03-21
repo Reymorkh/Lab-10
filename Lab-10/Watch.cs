@@ -44,8 +44,8 @@ namespace Lab_10
       }
     }
 
-    public virtual string Show() => ("Часы " + BrandName + " " + YearOfIssue + " года выпуска.");
-    public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска.");
+    public virtual string Show() => ("Часы " + BrandName + " " + YearOfIssue + " года выпуска. " + IdNumb);
+    public override string ToString() => ("Аналоговые часы " + BrandName + " " + YearOfIssue + " года выпуска. " + IdNumb);
     public virtual void Init() 
     {
       BrandName = GetString("имя бренда");

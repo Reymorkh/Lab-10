@@ -9,6 +9,7 @@ namespace Lab_10
 
     public SmartWatch() { }
     public SmartWatch(string name, short year, int id, string display, string os, bool hr) : base(name, year, id, display)
+
     {
       OperatingSystem = os;
       HeartRateSensor = hr;
@@ -32,8 +33,8 @@ namespace Lab_10
       }
     }
 
-    public override string Show() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует." : "отсутствует.");
-    public override string ToString() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует." : "отсутствует.");
+    public override string Show() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует. " : "отсутствует. " + IdNumb);
+    public override string ToString() => "Умные часы " + BrandName + " " + YearOfIssue + " года выпуска. ОС — " + OperatingSystem + " измеритель пульса " + (HeartRateSensor ? "присутствует. " : "отсутствует. " + IdNumb);
     public override void Init()
     {
       base.Init();
