@@ -47,7 +47,7 @@ namespace Consolechka
 
 
       #region массив типа IInit и счётчик объектов разных типов в нём
-      int smartCount = 0, analogCount = 0, digitalCount = 0, rectangleCount = 0;
+      int watchCount = 0, smartCount = 0, analogCount = 0, digitalCount = 0, rectangleCount = 0;
       IInit[] Iinits = new IInit[20];                                   //массив типа IInit и счётчик объектов разных типов в нём
       for (int i = 0; i < Iinits.Length; i++)
       {
@@ -56,28 +56,34 @@ namespace Consolechka
         {
           case 0:
             Iinits[i] = new SmartWatch();
-            smartCount++;
             break;
           case 1:
             Iinits[i] = new AnalogWatch();
-            analogCount++;
             break;
           case 2:
             Iinits[i] = new DigitalWatch();
-            digitalCount++;
             break;
           case 3:
             Iinits[i] = new Rectangle();
-            rectangleCount++;
             break;
           case 4:
             Iinits[i] = new Watch();
             break;
         }
-        Iinits[i].RandomInit();
+        if (Iinits[i].GetType() == typeof(Watch))
+          watchCount++;
+        else if (Iinits[i].GetType() == typeof(SmartWatch))
+          smartCount++;
+        else if (Iinits[i].GetType() == typeof(DigitalWatch))
+          digitalCount++;
+        else if (Iinits[i].GetType() == typeof(AnalogWatch))
+          analogCount++;
+        else if (Iinits[i].GetType() == typeof(Rectangle))
+          rectangleCount++;
+          Iinits[i].RandomInit();
         Console.WriteLine(Iinits[i].ToString());
       }
-      Console.WriteLine("\nУмных: " + smartCount + " Аналоговых: " + analogCount + " Электронных: " + digitalCount + " Прямоугольников: " + rectangleCount);
+      Console.WriteLine("\nОбычных часов: " + watchCount + ", Умных: " + smartCount + ", Аналоговых: " + analogCount + ", Электронных: " + digitalCount + ", Прямоугольников: " + rectangleCount);
       Console.WriteLine("\n\n");
       #endregion
 
@@ -111,9 +117,9 @@ namespace Consolechka
       Watch watch = new Watch("No brand", 1, 31);                              //попытка продемонстрировать копирование
       Watch watchCopy1 = (Watch)watch.ShallowCopy();
       Watch watchCopy2 = (Watch)watch.Clone();
-      Console.WriteLine($"\n\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия два: {watchCopy2}");
+      Console.WriteLine($"\n\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия полная: {watchCopy2}");
       watch.IdNumb.Id = 99;
-      Console.WriteLine($"Id в оригинале сменилось на 99.\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия два: {watchCopy2}");
+      Console.WriteLine($"Id в оригинале сменилось на 99.\nОригинал: {watch}\nКопия поверхностная: {watchCopy1}\nКопия полная: {watchCopy2}");
       #endregion
 
     }
